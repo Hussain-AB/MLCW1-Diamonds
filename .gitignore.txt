@@ -1,0 +1,11 @@
+# Raw data
+data/
+*.csv
+
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environment
+venv/
+.env/
