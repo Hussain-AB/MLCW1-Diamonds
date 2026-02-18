@@ -30,10 +30,10 @@ X_tst = X_tst.reindex(columns=trn.drop(columns=['outcome']).columns, fill_value=
 X = trn.drop(columns=['outcome'])
 y = trn['outcome']
 
-X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+#X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
 
-print(f"Train: {len(X_train)}, Validation: {len(X_val)}")
-print(f"Features: {X_train.shape[1]}")
+#print(f"Train: {len(X_train)}, Validation: {len(X_val)}")
+#print(f"Features: {X_train.shape[1]}")
 
 final_model = XGBRegressor(
     n_estimators=1000,
@@ -119,4 +119,5 @@ xgb_grid.fit(X_train, y_train)
 print(f"XGBoost - Best CV R²: {xgb_grid.best_score_:.4f}")
 print(f"XGBoost - Val R²: {r2_score(y_val, xgb_grid.best_estimator_.predict(X_val)):.4f}")
 print(f"XGBoost - Best params: {xgb_grid.best_params_}")
+
 '''
