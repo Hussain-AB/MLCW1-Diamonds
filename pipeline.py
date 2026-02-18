@@ -119,5 +119,4 @@ xgb_grid.fit(X_train, y_train)
 print(f"XGBoost - Best CV R²: {xgb_grid.best_score_:.4f}")
 print(f"XGBoost - Val R²: {r2_score(y_val, xgb_grid.best_estimator_.predict(X_val)):.4f}")
 print(f"XGBoost - Best params: {xgb_grid.best_params_}")
-
 '''
