@@ -9,3 +9,5 @@ __pycache__/
 # Virtual environment
 .venv/
 .env/
+
+CW1_submission_*.csv
