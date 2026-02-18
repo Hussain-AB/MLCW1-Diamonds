@@ -10,4 +10,6 @@ __pycache__/
 .venv/
 .env/
 
+
 CW1_submission_*.csv
+CW1_report_*.pdf
