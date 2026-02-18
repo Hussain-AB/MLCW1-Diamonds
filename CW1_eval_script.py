@@ -1,3 +1,4 @@
+from sympy import python
 import pandas as pd
 import numpy as np
 from sklearn.linear_model import LinearRegression
@@ -7,8 +8,8 @@ from sklearn.model_selection import train_test_split
 np.random.seed(123)
 
 # Import training data
-trn = pd.read_csv('CW1_train.csv')
-X_tst = pd.read_csv('CW1_test.csv') # This does not include true outcomes (obviously)
+trn = pd.read_csv('data/CW1_train.csv')
+X_tst = pd.read_csv('data/CW1_test.csv') # This does not include true outcomes (obviously)
 
 # Identify categorical columns
 categorical_cols = ['cut', 'color', 'clarity']
@@ -29,11 +30,25 @@ yhat_lm = model.predict(X_tst)
 # Format submission:
 # This is a single-column CSV with nothing but your predictions
 out = pd.DataFrame({'yhat': yhat_lm})
-out.to_csv('CW1_submission_KNUMBER.csv', index=False) # Please use your k-number here
+#out.to_csv('CW1_submission_KNUMBER.csv', index=False) # Please use your k-number here
+
+# Split training data to test ourselves
+X_train, X_val, y_train, y_val = train_test_split(X_trn, y_trn, test_size=0.2, random_state=42)
+model = LinearRegression()
+model.fit(X_train, y_train)
+yhat = model.predict(X_val)
+
+# R² on our validation set
+eps = y_val - yhat
+rss = np.sum(eps ** 2)
+tss = np.sum((y_val - y_val.mean()) ** 2)
+r2 = 1 - (rss / tss)
+print(f"Validation R²: {r2:.4f}")
+
+
 
 ################################################################################
-
-# At test time, we will use the true outcomes
+'''# At test time, we will use the true outcomes
 tst = pd.read_csv('CW1_test_with_true_outcome.csv') # You do not have access to this
 
 # This is the R^2 function
@@ -46,7 +61,4 @@ def r2_fn(yhat):
 
 # How does the linear model do?
 print(r2_fn(yhat_lm))
-
-
-
-
+'''
